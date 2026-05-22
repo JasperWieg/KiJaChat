@@ -1,3 +1,5 @@
+import java.io.*;
+import java.net.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VerbindenThread implements Runnable{
@@ -14,6 +16,18 @@ public class VerbindenThread implements Runnable{
     }
 
     public void run(){
-        
+        try {
+            Socket socket = new Socket(IPZuVerbinden, PortZuVerbinden);
+            if(!verbunden.get()){
+                ergebnis.setSocket(socket);
+            } else{
+                socket.close();
+            }
+            return;
+        } catch (IOException e) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException r) {}
+        }
     }
 }
