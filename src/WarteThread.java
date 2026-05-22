@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.net.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WarteThread implements Runnable{
@@ -12,6 +14,18 @@ public class WarteThread implements Runnable{
     }
 
     public void run(){
+        try{
+            ServerSocket serverSocket = new ServerSocket(eigenerPort);
+            Socket eingehendSocket = serverSocket.accept();
+            serverSocket.close();
+            if(verbunden.compareAndSet(false, true)){
+                ergebnis.setSocket(eingehendSocket);
+            } else{
+                eingehendSocket.close();
+            }
+        } catch(IOException IO){
+            
+        }
         /*hier mit serversocket hören auf verbindung, dann daraus 
         wweiteren socket nehmen und wieder schließen, dann falls nicht
         verbunden true auf true setzen, sonst einfach socket schließen

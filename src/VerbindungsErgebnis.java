@@ -3,13 +3,16 @@ import java.net.Socket;
 public class VerbindungsErgebnis {
     private Socket socket = null;
 
-    private void setSocket(Socket socket){
+    public void setSocket(Socket socket){
         this.socket = socket;
-        //danach alle threads aufrufen
+        notifyAll();
+        
     }
 
-    private Socket wartenAufSocket(){
-        //während socket null ist warten und dann socket zurückgeben 
+    private Socket wartenAufSocket() throws InterruptedException{
+        while(socket == null){
+            wait();
+        }
         return socket;
     }
 }
