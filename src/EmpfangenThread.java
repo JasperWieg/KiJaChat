@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.*;
 
 public class EmpfangenThread implements Runnable {
@@ -10,8 +12,11 @@ public class EmpfangenThread implements Runnable {
     }
 
     public void run(){
-        /*hier zeilen lesen per bufferedReader, dann in konsole drucken 
-        und schließlich neuen input erwarten per /r schön formatieren,
-        später noch messagehandler objekt erstmal aber nicht */
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String nachrichtErhalten = in.readLine();
+            System.out.println(nachrichtErhalten);
+        } catch (Exception e) {
+        }
     }
 }
