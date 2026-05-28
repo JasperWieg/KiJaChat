@@ -5,6 +5,8 @@ public class Peer {
     private Socket socket;
     private PrintWriter out;
 
+    public Peer(){}
+
     public void verbinden(int meinPort, String IPZuVerbinden, int PortZuVerbinden){
         /*neue atomicboolean(falsch) und verbindungsergebnis erstellen 
         dann wartethread und verbindethread starten und von ergebnis
