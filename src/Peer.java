@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Peer {
     private Socket socket;
@@ -7,22 +8,27 @@ public class Peer {
 
     public Peer(){}
 
-    public void verbinden(int meinPort, String IPZuVerbinden, int PortZuVerbinden){
-        /*neue atomicboolean(falsch) und verbindungsergebnis erstellen 
-        dann wartethread und verbindethread starten und von ergebnis
-        wartefunktion socket kriegen dann outputstream vom socket zum
-        printWriter machen*/
+    public void verbinden(int meinPort, String IPZuVerbinden, int PortZuVerbinden)throws IOException, InterruptedException{
+        AtomicBoolean verbunden = new AtomicBoolean(false);
+        VerbindungsErgebnis ergebnis = new VerbindungsErgebnis();
+        Thread warteThread = new Thread(new WarteThread(meinPort, verbunden, ergebnis));
+        warteThread.start();
+        Thread verbindenThread = new Thread(new VerbindenThread(IPZuVerbinden, PortZuVerbinden, verbunden, ergebnis));
+        verbindenThread.start();
+        socket = ergebnis.wartenAufSocket();
+        out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
     }
 
     public void empfangenStarten(String userName){
-        /*empfangsthread starten  */
+        Thread empfangenThread = new Thread(new EmpfangenThread(socket, userName));
+        empfangenThread.start();
     }
 
     public void senden(String nachricht){
-        //Nachricht zu printwriter drucken
+        out.println(nachricht);
     }
 
-    public void beenden(){
-        Socket schließen;
+    public void beenden()throws IOException{
+        if(socket!=null){socket.close();}
     }
 }
