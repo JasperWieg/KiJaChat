@@ -31,9 +31,5 @@ public class WarteThread implements Runnable{
         } catch(IOException IO){
             
         }
-        /*hier mit serversocket hören auf verbindung, dann daraus 
-        wweiteren socket nehmen und wieder schließen, dann falls nicht
-        verbunden true auf true setzen, sonst einfach socket schließen
-        weil anderer thread schneller verbunden hat */
     }
 }

@@ -16,13 +16,13 @@ public class Main {
         try{
             peer.verbinden(eigenerPort, IPzuVerbinden, PortZuVerbinden);
             peer.empfangenStarten(userName);
-            System.out.print(">");
+            System.out.print(userName + "> ");
             while(scanner.hasNextLine()){
                 String input = scanner.nextLine();
                 if(input.isBlank()){continue;}
                 peer.senden(userName + "> " + input);
                 //System.out.println(userName + "> " + input);
-                System.out.print(">");
+                System.out.print(userName + "> ");
             }
         }catch(IOException | InterruptedException e){}
     }

@@ -20,7 +20,8 @@ public class EmpfangenThread implements Runnable {
             String nachrichtErhalten;
             while((nachrichtErhalten = in.readLine()) != null){
                 speicher.hinzufuegenNachricht(nachrichtErhalten);
-                System.out.println(nachrichtErhalten);
+                System.out.print("\r           ");
+                System.out.println("\r" + nachrichtErhalten);
                 System.out.print(">");
             }
         } catch (IOException e) {
