@@ -26,6 +26,7 @@ public class Peer {
 
     public void senden(String nachricht){
         out.println(nachricht);
+        out.flush();
     }
 
     public void beenden()throws IOException{

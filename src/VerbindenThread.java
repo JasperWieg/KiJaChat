@@ -16,18 +16,20 @@ public class VerbindenThread implements Runnable{
     }
 
     public void run(){
-        try {
-            Socket socket = new Socket(IPZuVerbinden, PortZuVerbinden);
-            if(!verbunden.get()){
-                ergebnis.setSocket(socket);
-            } else{
-                socket.close();
-            }
-            return;
-        } catch (IOException e) {
+        while(!verbunden.get()){
             try {
-                Thread.sleep(500);
-            } catch (InterruptedException r) {}
+                Socket socket = new Socket(IPZuVerbinden, PortZuVerbinden);
+                if(verbunden.compareAndSet(false, true)){
+                    socket.close();
+                } else{
+                    ergebnis.setSocket(socket);
+                }
+                return;
+            } catch (IOException e) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException r) {}
+            }
         }
     }
 }

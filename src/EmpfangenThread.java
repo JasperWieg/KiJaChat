@@ -15,7 +15,10 @@ public class EmpfangenThread implements Runnable {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String nachrichtErhalten = in.readLine();
-            System.out.println(nachrichtErhalten);
+            while((nachrichtErhalten = in.readLine()) != null){
+                System.out.println(nachrichtErhalten);
+                System.out.print(">");
+            }
         } catch (Exception e) {
         }
     }
