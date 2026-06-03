@@ -16,7 +16,12 @@ public class WarteThread implements Runnable{
     public void run(){
         try{
             ServerSocket serverSocket = new ServerSocket(eigenerPort);
-            Socket eingehendSocket = serverSocket.accept();
+            Socket eingehendSocket = null;
+
+            while(eingehendSocket == null) {
+                eingehendSocket = serverSocket.accept();
+            }
+
             serverSocket.close();
             if(verbunden.compareAndSet(false, true)){
                 ergebnis.setSocket(eingehendSocket);

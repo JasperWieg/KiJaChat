@@ -23,6 +23,9 @@ public class VerbindenThread implements Runnable{
                     ergebnis.setSocket(socket);
                 } else{
                     socket.close();
+                    ergebnis.setSocket(socket); //Vorher: Schließen beim verbinden?
+                } else{
+                    socket.close();       //Vorher: Verbinden wenn wir schon verbunden sind?
                 }
                 return;
             } catch (IOException e) {
