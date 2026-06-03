@@ -5,8 +5,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Peer {
     private Socket socket;
     private PrintWriter out;
+    private ChatSpeicher speicher;
 
-    public Peer(){}
+    public Peer(ChatSpeicher speicher){
+        this.speicher = speicher;
+    }
 
     public void verbinden(int meinPort, String IPZuVerbinden, int PortZuVerbinden)throws IOException, InterruptedException{
         AtomicBoolean verbunden = new AtomicBoolean(false);
@@ -20,11 +23,12 @@ public class Peer {
     }
 
     public void empfangenStarten(String userName){
-        Thread empfangenThread = new Thread(new EmpfangenThread(socket, userName));
+        Thread empfangenThread = new Thread(new EmpfangenThread(socket, userName, speicher));
         empfangenThread.start();
     }
 
     public void senden(String nachricht){
+        speicher.hinzufuegenNachricht(nachricht);
         out.println(nachricht);
         out.flush();
     }

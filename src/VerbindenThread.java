@@ -20,9 +20,9 @@ public class VerbindenThread implements Runnable{
             try {
                 Socket socket = new Socket(IPZuVerbinden, PortZuVerbinden);
                 if(verbunden.compareAndSet(false, true)){
-                    socket.close();
+                    ergebnis.setSocket(socket); //Vorher: Schließen beim verbinden?
                 } else{
-                    ergebnis.setSocket(socket);
+                    socket.close();       //Vorher: Verbinden wenn wir schon verbunden sind?
                 }
                 return;
             } catch (IOException e) {
