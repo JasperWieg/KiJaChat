@@ -1,12 +1,12 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
 public class ChatSpeicher{
-    ArrayList<String> nachrichten = new ArrayList();
+    DynArray<String> nachrichten = new DynArray();
 
     public void hinzufuegenNachricht(String nachricht){
-        nachrichten.add(nachricht);
+        nachrichten.append(nachricht);
         speicherNachrichten("chat.txt");
 
     }
@@ -15,9 +15,10 @@ public class ChatSpeicher{
         try{
             BufferedWriter writer = new BufferedWriter(new FileWriter(pfad));
 
-            for(String zeile : nachrichten) {
-                writer.write(zeile + "\n");
+            for(int i = 0; i < nachrichten.getLength(); i ++) {
+                writer.write(nachrichten.getItem(i) + "\n");
             }
+            
 
             writer.close();
         } catch (IOException e) {
