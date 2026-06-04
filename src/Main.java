@@ -28,7 +28,6 @@ public class Main {
                     String input = lineReader.readLine(userName + "> ");
                     if(input == null || input.isBlank()) continue;
                     peer.senden(userName + "> " + input);
-                    lineReader.printAbove(userName + "> " + input);
                 } catch(UserInterruptException | EndOfFileException e){
                     break;
                 }
