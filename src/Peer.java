@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import org.jline.reader.LineReader;
 
 public class Peer {
     private Socket socket;
@@ -22,8 +23,8 @@ public class Peer {
         out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
     }
 
-    public void empfangenStarten(String userName){
-        Thread empfangenThread = new Thread(new EmpfangenThread(socket, userName, speicher));
+    public void empfangenStarten(String userName, LineReader lineReader){
+        Thread empfangenThread = new Thread(new EmpfangenThread(socket, userName, speicher, lineReader));
         empfangenThread.start();
     }
 
