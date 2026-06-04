@@ -3,6 +3,10 @@ import java.util.Scanner;
 import org.jline.reader.*;
 import org.jline.terminal.*;
 
+/**
+ * Hauptsteuerung des Chats und der Verbindungen
+ *
+ */
 public class Main {
     public static void main(String[] args) {
         int eigenerPort = 5000;
