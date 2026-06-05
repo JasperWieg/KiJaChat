@@ -18,7 +18,6 @@ public class Main {
         String userName = scanner.nextLine();
         System.out.println("Zu kontaktierende IP-Adresse:");
         String IPzuVerbinden = scanner.nextLine();
-
         
         try {
             Terminal terminal = TerminalBuilder.builder().system(true).build();
@@ -39,16 +38,5 @@ public class Main {
             }
             peer.beenden();
         } catch(IOException | InterruptedException e){}
-
-            while(true) {
-            String input = scanner.nextLine();
-
-            if(input.equals("/chatleeren")) {
-               speicher.chatLeeren("chat.txt");
-            }
-        }
-    
     }
-
-
 }
