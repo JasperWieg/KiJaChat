@@ -40,5 +40,25 @@ public class ChatSpeicher{
             System.out.println("Speichern fehlgeschlagen");
         }
     }
+    /**
+    * leert die gespeicherten Nachrichten aus dem file
+    *
+    * @param pfad pfad der txt-Datei
+    * 
+    */
+
+    public void chatLeeren(String pfad){
+        try{
+            FileWriter writer = new FileWriter("chat.txt", false);
+
+            writer.write("");
+            System.out.println("Chat wurde geleert.");
+
+
+
+        } catch (IOException e) {
+            System.out.println("Chat leeren fehlgeschlagen");
+        }
+    }
 
 }
